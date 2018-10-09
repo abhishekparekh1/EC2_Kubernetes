@@ -17,9 +17,9 @@ stable"
 sudo apt-get update
 sudo apt-get install docker-ce -y
 kubeadm init --pod-network-cidr=192.168.0.0/16
-echo "export KUBECONFIG=\"/etc/kubernetes/admin.conf\"" >> ~/.bashrc
-echo "alias k='kubectl'" >> ~/.bashrc
-source ~/.bashrc
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
 kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
 kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -27,4 +27,5 @@ wget https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/al
 echo '  type: NodePort' >> kubernetes-dashboard.yaml 
 kubectl apply -f kubernetes-dashboard.yaml 
 kubectl create -f https://gist.github.com/ofirmakmal/05ada26c02fd09f335580ba851252cfb/raw/ab522abda9d6f6e38427ce1440410cf4bb1f6d56/dashboard-admin.yaml
-
+echo "alias k='kubectl'" >> ~/.bashrc
+source ~/.bashrc
