@@ -20,7 +20,6 @@ kubeadm init --pod-network-cidr=192.168.0.0/16 > /var/www/html/jointoken.html
 export KUBECONFIG=/etc/kubernetes/admin.conf
 kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
 kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
-kubectl taint nodes --all node-role.kubernetes.io/master-
 wget https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/alternative/kubernetes-dashboard.yaml
 echo '  type: NodePort' >> kubernetes-dashboard.yaml 
 kubectl apply -f kubernetes-dashboard.yaml 
