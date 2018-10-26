@@ -21,23 +21,17 @@
 # test_desired: Px1 vector, each element is a desired output
 # learning step: scalar
 
+# In[18]:
 
-# In[590]:
-
-
-# Imports
 
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
 
-# In[539]:
-
-
 # Function for generating the data used for training and testing
 
-def generate_data(mu, sigma, num_data_points, num_test_points, filter_size, use_real_data, DEBUG):
+def generate_data(mu, sigma, filter_size, use_real_data, filename, percent_test, DEBUG):
     
     if DEBUG > 1:
         print('Generating new data...')
@@ -47,6 +41,9 @@ def generate_data(mu, sigma, num_data_points, num_test_points, filter_size, use_
     
     # Generate data from a normal distribution
     if use_real_data == 0:
+        
+        num_data_points = 10000
+        num_test_points = np.int(np.floor(num_data_points*percent_test))
         
         data = np.random.normal(mu,sigma,num_data_points)
         
@@ -61,10 +58,13 @@ def generate_data(mu, sigma, num_data_points, num_test_points, filter_size, use_
         
         data = np.array([])
         
-        with open('SN_m_tot_V2.0.csv', newline='') as csvfile:
+        with open(filename, newline='') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quotechar='|')
             for row in reader:
                 data = np.append(data,float(row[3]))
+                
+    num_data_points = data.shape[0]
+    num_test_points = np.int(np.floor(num_data_points*percent_test))
     
     # Create the train_data, train_desired, test_data, and test_desired data sets
     train_temp = np.array(data[0:num_data_points-num_test_points])
@@ -87,7 +87,7 @@ def generate_data(mu, sigma, num_data_points, num_test_points, filter_size, use_
     return x,t,z,d
 
 
-# In[540]:
+# In[19]:
 
 
 # Function used for creating the required data structures
@@ -103,7 +103,7 @@ def initialization(filter_size, DEBUG):
     return weights
 
 
-# In[541]:
+# In[20]:
 
 
 # Function that trains the weights of the filter
@@ -123,7 +123,7 @@ def train(train_data, train_desired, learning_step, weights, DEBUG):
     return weights
 
 
-# In[593]:
+# In[21]:
 
 
 # Function that returns the error of the test data
@@ -149,35 +149,3 @@ def test_error(test_data, test_desired, weights, DEBUG):
         plt.show()
     
     return NMSE
-
-
-# In[600]:
-
-
-# Driver:
-
-DEBUG = 2
-
-mu = 0
-sigma = 1
-num_data_points = 3229
-num_test_points = 400
-filter_size = 5
-use_real_data = 1
-learning_step = 0.00001
-
-train_data, train_desired, test_data, test_desired = generate_data(mu, sigma, num_data_points, num_test_points, filter_size, use_real_data, DEBUG)
-weights = initialization(filter_size, DEBUG)
-
-weights = train(train_data, train_desired, learning_step, weights, DEBUG)
-
-NMSE = test_error(test_data, test_desired, weights, DEBUG)
-
-print(NMSE)
-
-
-# In[ ]:
-
-
-
-
