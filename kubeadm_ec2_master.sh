@@ -15,7 +15,7 @@ sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/u
 $(lsb_release -cs) \
 stable"
 sudo apt-get update
-sudo apt-get install docker-ce -y
+sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu -y
 kubeadm init --pod-network-cidr=192.168.0.0/16 > /var/www/html/jointoken.html
 export KUBECONFIG=/etc/kubernetes/admin.conf
 kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
