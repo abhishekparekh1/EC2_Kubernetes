@@ -8,7 +8,7 @@
 import argparse
 import sys
 import ANN_TF_Function
-
+import boto3
 
 # In[2]:
 
@@ -61,3 +61,5 @@ output_fp = open(output_name + '.txt', 'w+')
 output_fp.write(str(error))
 output_fp.close()
 
+s3 = boto3.resource('s3')
+s3.Object('deepoptimization-uf-optml-bucket', output_name + '.txt').put(Body=open(output_name + '.txt', 'rb'))
