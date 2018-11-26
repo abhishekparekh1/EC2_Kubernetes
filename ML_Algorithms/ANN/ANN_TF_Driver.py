@@ -49,7 +49,7 @@ model = ANN_TF_Function.initialization(train_data, train_desired, network_size, 
 model = ANN_TF_Function.train(train_data, train_desired, learning_rate, model, DEBUG)
 error = ANN_TF_Function.test_error(test_data, test_desired, model, DEBUG)
 
-output_name = 'ANN_TF_Driver'
+output_name = 'ANN_TF_Driver.py'
 output_name = output_name[:-3]
 
 for layer_size in network_size:
