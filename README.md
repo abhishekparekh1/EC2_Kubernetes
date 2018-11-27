@@ -3,7 +3,9 @@
 This repository is for the course project of EEL6761 - Cloud Computing and Storage at the University of Florida. Our team is T1-DeepOptimization and the contributors are - 
 
 Abhishek "The Snow" Parekh
+
 Ruben "The Hail" Vazquez
+
 Justin "The Rain" Calean
 
 Make sure the EC2 instance has access to S3 with IAM role or AWS Credentials
