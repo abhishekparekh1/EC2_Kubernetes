@@ -16,7 +16,7 @@ sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/u
 $(lsb_release -cs) \
 stable"
 sudo apt-get update
-sudo apt-get install docker-ce -y
+sudo apt-get install docker-ce=18.06.1~ce~3-0~ubuntu -y
 export KUBECONFIG=/etc/kubernetes/admin.conf
 alias k='kubectl' >> ~/.bashrc
 source ~/.bashrc
