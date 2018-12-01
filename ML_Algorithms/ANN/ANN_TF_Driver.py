@@ -8,7 +8,7 @@
 import argparse
 import sys
 import ANN_TF_Function
-
+import boto3
 
 # In[2]:
 
@@ -49,7 +49,7 @@ model = ANN_TF_Function.initialization(train_data, train_desired, network_size, 
 model = ANN_TF_Function.train(train_data, train_desired, learning_rate, model, DEBUG)
 error = ANN_TF_Function.test_error(test_data, test_desired, model, DEBUG)
 
-output_name = sys.argv[0]
+output_name = 'ANN_TF_Driver.py'
 output_name = output_name[:-3]
 
 for layer_size in network_size:
@@ -61,3 +61,5 @@ output_fp = open(output_name + '.txt', 'w+')
 output_fp.write(str(error))
 output_fp.close()
 
+s3 = boto3.resource('s3')
+s3.Object('deepoptimization-uf-optml-bucket', output_name + '.txt').put(Body=open(output_name + '.txt', 'rb'))
