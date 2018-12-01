@@ -20,7 +20,7 @@ CLI.add_argument(
     "--DEBUG",
     nargs = 1,
     type = int,
-    default = 0
+    default = [0]
 )
 
 CLI.add_argument(
@@ -34,7 +34,7 @@ CLI.add_argument(
     "--learning_rate",
     nargs = 1,
     type = float,
-    default = 0.1
+    default = [0.1]
 )
 
 args = CLI.parse_args()
