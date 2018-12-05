@@ -1,6 +1,6 @@
 import sys
 import LMS
-import boto3
+#import boto3
 
 DEBUG = int(sys.argv[5])
 
@@ -26,5 +26,5 @@ output_fp = open('LMS-' + sys.argv[1].replace('.','_') + '.txt', 'w+')
 output_fp.write(str(NMSE))
 output_fp.close()
 
-s3 = boto3.resource('s3')
-s3.Object('deepoptimization-uf-optml-bucket', 'LMS-' + sys.argv[1].replace('.','_') + '.txt').put(Body=open('LMS-' + sys.argv[1].replace('.','_') + '.txt', 'rb'))
+#s3 = boto3.resource('s3')
+#s3.Object('deepoptimization-uf-optml-bucket', 'LMS-' + sys.argv[1].replace('.','_') + '.txt').put(Body=open('LMS-' + sys.argv[1].replace('.','_') + '.txt', 'rb'))
