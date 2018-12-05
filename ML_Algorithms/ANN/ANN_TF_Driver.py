@@ -58,7 +58,7 @@ for layer_size in network_size:
 output_name = output_name + '-' + str(learning_rate).replace('.','_')
 
 output_fp = open(output_name + '.txt', 'w+')
-output_fp.write(str(error))
+output_fp.write(str(learning_rate) + '_' + str(network_size) + ' ' + str(error) + '\n')
 output_fp.close()
 
 s3 = boto3.resource('s3')
