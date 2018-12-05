@@ -23,7 +23,7 @@ if DEBUG > 0:
     print(NMSE)
 
 output_fp = open('LMS-' + sys.argv[1].replace('.','_') + '.txt', 'w+')
-output_fp.write(str(NMSE))
+output_fp.write(sys.argv[1] + ' ' + str(NMSE) + '\n')
 output_fp.close()
 
 s3 = boto3.resource('s3')
