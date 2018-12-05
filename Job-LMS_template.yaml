@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job    
+metadata:
+  name: deepoptimization$2
+spec:
+  template:
+    spec:
+      containers:
+      - name: optml
+        image: abhishekparekh1/deepoptml:deadpool
+        command: ["python3","/app/EC2_Kubernetes/ML_Algorithms/LMS/LMS_driver.py","$1","/app/EC2_Kubernetes/ML_Algorithms/LMS/SN_m_tot_V2.0.csv","1","0.10","1"]
+      restartPolicy: Never
+  backoffLimit: 1

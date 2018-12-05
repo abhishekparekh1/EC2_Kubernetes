@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job    
+metadata:
+  name: deepoptimization1
+spec:
+  template:
+    spec:
+      containers:
+      - name: optml
+        image: abhishekparekh1/deepoptml:deadpool
+        command: ["python3","/app/EC2_Kubernetes/ML_Algorithms/ANN/ANN_TF_Driver.py","--DEBUG 0","--learning_rate 0.001",--network_size 2]
+      restartPolicy: Never
+  backoffLimit: 1
